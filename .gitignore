@@ -1,0 +1,8 @@
+.venv/
+venv/
+bin/
+.buildozer/
+*.pyc
+__pycache__/
+scans.csv
+.venv.zip
