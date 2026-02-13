@@ -11,15 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v2
         with:
-          repository_root: .
-          workdir: .
-          command: buildozer -v android debug
-          buildozer_version: stable
+          python-version: "3.11"
+          buildozer-cmd: buildozer -v android debug
 
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: bin/*.apk
+          path: ./bin/*.apk
