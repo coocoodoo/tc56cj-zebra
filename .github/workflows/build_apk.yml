@@ -1,3 +1,9 @@
+# Build Android APK for Zebra TC56cj (pywebview + buildozer).
+# Working config (do not remove without testing):
+# - ubuntu-latest; Python 3.11, Java 17.
+# - apt: autoconf, automake, libtool, libltdl-dev (libtool macros for libffi), libtinfo6 (not libtinfo5 on Ubuntu 24).
+# - ACLOCAL_PATH=/usr/share/aclocal so p4a's libffi configure finds LT_SYS_SYMBOL_USCORE etc.
+# - buildozer.spec: android.accept_sdk_license = True, android.add_jars = lib/pywebview-android.jar.
 name: Build Android APK
 
 on:

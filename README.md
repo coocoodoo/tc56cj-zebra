@@ -18,7 +18,18 @@ Python app with a pywebview GUI: scan barcodes on a Zebra TC56cj (or type them o
 
 ## Run on Zebra TC56cj (Android)
 
-### 1. Build the APK (on WSL or Linux only)
+### 1. Build the APK
+
+**Option A: GitHub Actions (recommended)**  
+Push to `main` or `master` (or run the workflow manually from the Actions tab). The workflow at `.github/workflows/build_apk.yml` builds the APK; download it from the run’s **Artifacts** (android-apk).
+
+**Working CI configuration (for future builds):**
+- **Runner:** `ubuntu-latest` (Ubuntu 24).
+- **System packages:** `autoconf`, `automake`, `libtool`, `libltdl-dev` (for libtool m4 macros used by libffi), `libtinfo6` (not `libtinfo5` — not available on Ubuntu 24), plus `pkg-config`, `zlib1g-dev`, `libncurses*`, `cmake`, `libffi-dev`, `libssl-dev`, `openjdk-17-jdk`.
+- **Build env:** `ACLOCAL_PATH=/usr/share/aclocal` so `aclocal`/`autoreconf` find libtool macros (e.g. `LT_SYS_SYMBOL_USCORE`) when python-for-android builds libffi.
+- **buildozer.spec:** `android.accept_sdk_license = True` for non-interactive CI; `android.add_jars = lib/pywebview-android.jar` (JAR is in repo under `lib/`).
+
+**Option B: Local build (WSL or Linux only)**
 
 Buildozer does not run on Windows natively; use **WSL** (Ubuntu, etc.) or a Linux machine.
 
@@ -68,4 +79,5 @@ After that, open the app, focus the text field (it’s focused by default), and 
 - `api.py` – Python API exposed to the frontend: `add_scan`, `get_scans`, `get_csv_path`.
 - `assets/index.html` – Web UI: scanner input, scan list, CSV path.
 - `requirements.txt` – `pywebview`
-- `buildozer.spec` – Android APK build (set `android.add_jars` before building).
+- `buildozer.spec` – Android APK build; JAR in `lib/`, see spec for CI-friendly options.
+- `.github/workflows/build_apk.yml` – GitHub Actions workflow for building the APK (see README “Working CI configuration”).
