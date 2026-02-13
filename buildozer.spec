@@ -28,6 +28,7 @@ android.allow_backup = True
 
 # JAR bundled in repo so GitHub Actions / any build can find it
 android.add_jars = lib/pywebview-android.jar
+android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2
