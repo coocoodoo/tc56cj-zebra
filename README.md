@@ -29,6 +29,8 @@ Push to `main` or `master` (or run the workflow manually from the Actions tab). 
 - **Build env:** `ACLOCAL_PATH=/usr/share/aclocal` so `aclocal`/`autoreconf` find libtool macros (e.g. `LT_SYS_SYMBOL_USCORE`) when python-for-android builds libffi.
 - **buildozer.spec:** `android.accept_sdk_license = True` for non-interactive CI; `android.add_jars = lib/pywebview-android.jar` (JAR is in repo under `lib/`).
 
+Full details: **CI_BUILD.md**.
+
 **Option B: Local build (WSL or Linux only)**
 
 Buildozer does not run on Windows natively; use **WSL** (Ubuntu, etc.) or a Linux machine.
@@ -80,4 +82,4 @@ After that, open the app, focus the text field (it’s focused by default), and 
 - `assets/index.html` – Web UI: scanner input, scan list, CSV path.
 - `requirements.txt` – `pywebview`
 - `buildozer.spec` – Android APK build; JAR in `lib/`, see spec for CI-friendly options.
-- `.github/workflows/build_apk.yml` – GitHub Actions workflow for building the APK (see README “Working CI configuration”).
+- `.github/workflows/build_apk.yml` – GitHub Actions workflow for building the APK (see “Working CI configuration”).
